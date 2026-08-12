@@ -751,7 +751,8 @@ fn get_sdk(
             let header_payload = sdk.payloads.iter().find(|payload| {
                 payload
                     .file_name
-                    .strip_prefix("Installers\\Windows SDK OnecoreUap Headers ")
+                    .strip_prefix("Installers")
+                    .and_then(|fname| fname[1..].strip_prefix("Windows SDK OnecoreUap Headers "))
                     .and_then(|fname| fname.strip_suffix("-x86_en-us.msi"))
                     .is_some_and(|fname| fname == arch.as_ms_str())
             });
